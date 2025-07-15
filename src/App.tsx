@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import MapComponent from './components/Map';
 import FilterComponent from './components/Filter';
 import { SwimmingSpot, FilterOptions } from './types';
@@ -36,7 +36,18 @@ const App: React.FC = () => {
     waterQuality: [],
     season: []
   });
-  const [spots, setSpots] = useState<SwimmingSpot[]>(initialSpots);
+  
+  // Load spots from localStorage on component mount
+  const [spots, setSpots] = useState<SwimmingSpot[]>(() => {
+    const savedSpots = localStorage.getItem('swimmingSpots');
+    return savedSpots ? JSON.parse(savedSpots) : initialSpots;
+  });
+  
+  // Save spots to localStorage whenever spots change
+  useEffect(() => {
+    localStorage.setItem('swimmingSpots', JSON.stringify(spots));
+  }, [spots]);
+
   const [showAddModal, setShowAddModal] = useState(false);
   const [newSpot, setNewSpot] = useState<Omit<SwimmingSpot, 'id'>>(defaultNewSpot);
   const [addSpotMode, setAddSpotMode] = useState(false);
@@ -157,10 +168,22 @@ const App: React.FC = () => {
             <h2>Add a New Swimming Spot</h2>
             <form onSubmit={handleAddSpotSubmit} className="add-spot-form">
               <label>Name
-                <input name="name" value={newSpot.name} onChange={handleNewSpotChange} required />
+                <input 
+                  name="name" 
+                  value={newSpot.name} 
+                  onChange={handleNewSpotChange} 
+                  placeholder="Enter swimming spot name..."
+                  required 
+                />
               </label>
               <label>Description
-                <textarea name="description" value={newSpot.description} onChange={handleNewSpotChange} required />
+                <textarea 
+                  name="description" 
+                  value={newSpot.description} 
+                  onChange={handleNewSpotChange} 
+                  placeholder="Describe the swimming spot..."
+                  required 
+                />
               </label>
               <label>Latitude
                 <input name="latitude" type="number" step="any" value={newSpot.latitude} onChange={handleNewSpotChange} required />

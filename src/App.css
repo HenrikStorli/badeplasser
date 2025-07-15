@@ -163,7 +163,7 @@
 
 /* Spot Details */
 .spot-details {
-  width: 350px;
+  width: 280px;
   background: white;
   border-left: 1px solid #e9ecef;
   overflow-y: auto;
@@ -172,130 +172,256 @@
 
 .spot-details-content {
   position: relative;
-  padding: 1.5rem;
+  padding: 1rem;
 }
 
 .spot-details-content h2 {
-  margin: 0 0 1rem 0;
+  margin: 0 0 0.75rem 0;
   color: #495057;
-  font-size: 1.3rem;
+  font-size: 1.2rem;
 }
 
 .spot-details-content p {
   color: #6c757d;
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
 }
 
 .spot-amenities h3 {
-  margin: 0 0 1rem 0;
-  font-size: 1rem;
+  margin: 0 0 0.75rem 0;
+  font-size: 0.9rem;
   color: #495057;
 }
 
 .amenities-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  gap: 0.4rem;
+  margin-bottom: 1rem;
 }
 
 .amenity {
   background: #f8f9fa;
-  padding: 0.5rem;
+  padding: 0.4rem;
   border-radius: 6px;
-  font-size: 0.85rem;
+  font-size: 0.8rem;
   color: #495057;
 }
 
 .spot-info {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+  padding: 0.4rem;
+  background: linear-gradient(135deg, #f8fafc, #f1f5f9);
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  max-width: 240px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Handle badges directly in spot-info (for map popups) */
+.spot-info > .quality-badge,
+.spot-info > .season-badge,
+.spot-info > .paid-badge,
+.spot-info > .free-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  gap: 0.25rem;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  min-width: fit-content;
+  max-width: 80px;
+  margin: 0.25rem;
 }
 
 .info-item {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0.75rem;
-  background: #f8f9fa;
+  justify-content: space-between;
+  gap: 0.4rem;
+  padding: 0.3rem 0.5rem;
+  background: white;
   border-radius: 6px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  border: 1px solid #f1f5f9;
+  transition: all 0.2s ease;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+}
+
+.info-item:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+  z-index: 3;
 }
 
 .info-item strong {
-  color: #495057;
-  font-size: 0.9rem;
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.75rem;
+  min-width: 60px;
+  flex-shrink: 0;
 }
 
 /* Badges */
-.quality-badge {
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 500;
+.quality-badge,
+.season-badge,
+.paid-badge,
+.free-badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
   text-transform: capitalize;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  min-width: fit-content;
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  z-index: 1;
+}
+
+.quality-badge::before,
+.season-badge::before,
+.paid-badge::before,
+.free-badge::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.3), transparent);
+  pointer-events: none;
+  z-index: 1;
 }
 
 .quality-excellent {
-  background: #d4edda;
-  color: #155724;
+  background: linear-gradient(135deg, #4ade80, #22c55e);
+  color: white;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.quality-excellent::after {
+  content: '⭐';
+  font-size: 0.7rem;
 }
 
 .quality-good {
-  background: #d1ecf1;
-  color: #0c5460;
+  background: linear-gradient(135deg, #60a5fa, #3b82f6);
+  color: white;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+.quality-good::after {
+  content: '💧';
+  font-size: 0.7rem;
 }
 
 .quality-fair {
-  background: #fff3cd;
-  color: #856404;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: white;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.quality-fair::after {
+  content: '⚠️';
+  font-size: 0.7rem;
 }
 
 .quality-poor {
-  background: #f8d7da;
-  color: #721c24;
+  background: linear-gradient(135deg, #f87171, #ef4444);
+  color: white;
+  border: 1px solid rgba(239, 68, 68, 0.3);
 }
 
-.season-badge {
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 500;
-  text-transform: capitalize;
+.quality-poor::after {
+  content: '🚫';
+  font-size: 0.7rem;
 }
 
 .season-summer {
-  background: #ffeaa7;
-  color: #b8860b;
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+  color: white;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.season-summer::after {
+  content: '☀️';
+  font-size: 0.7rem;
 }
 
 .season-year-round {
-  background: #a8e6cf;
-  color: #2d5a3d;
+  background: linear-gradient(135deg, #34d399, #10b981);
+  color: white;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.season-year-round::after {
+  content: '🔄';
+  font-size: 0.7rem;
 }
 
 .season-indoor {
-  background: #dda0dd;
-  color: #6a5acd;
+  background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+  color: white;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.season-indoor::after {
+  content: '🏢';
+  font-size: 0.7rem;
 }
 
 .paid-badge {
-  background: #ff6b6b;
+  background: linear-gradient(135deg, #f87171, #ef4444);
   color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 500;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.paid-badge::after {
+  content: '💰';
+  font-size: 0.7rem;
 }
 
 .free-badge {
-  background: #4ecdc4;
+  background: linear-gradient(135deg, #4ade80, #22c55e);
   color: white;
-  padding: 0.25rem 0.75rem;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 500;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.free-badge::after {
+  content: '🎉';
+  font-size: 0.7rem;
+}
+
+/* Hover effects for badges */
+.quality-badge:hover,
+.season-badge:hover,
+.paid-badge:hover,
+.free-badge:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 3px 8px rgba(0,0,0,0.2);
+  z-index: 2;
 }
 
 /* Map Popup Styles */
@@ -436,79 +562,267 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background: rgba(0,0,0,0.3);
+  background: rgba(0,0,0,0.5);
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 2000;
+  backdrop-filter: blur(8px);
 }
+
 .modal {
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
-  padding: 2rem;
-  min-width: 350px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  padding: 2.5rem;
+  min-width: 400px;
   max-width: 95vw;
+  max-height: 90vh;
   position: relative;
+  border: 1px solid rgba(255,255,255,0.2);
+  overflow-y: auto;
 }
+
 .close-modal {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: linear-gradient(135deg, #ff6b6b, #ee5a52);
   border: none;
-  font-size: 2rem;
-  color: #888;
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.2rem;
   cursor: pointer;
   z-index: 10;
-  transition: color 0.2s;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(255,107,107,0.3);
 }
+
 .close-modal:hover {
-  color: #764ba2;
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px rgba(255,107,107,0.4);
 }
+
+.modal h2 {
+  margin: 0 0 2rem 0;
+  color: #2d3748;
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.add-spot-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
 .add-spot-form label {
   display: block;
-  margin-bottom: 1rem;
-  font-weight: 500;
-  color: #495057;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #4a5568;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
+
 .add-spot-form input[type="text"],
 .add-spot-form input[type="number"],
 .add-spot-form textarea,
 .add-spot-form select {
   width: 100%;
-  padding: 0.5rem;
-  border-radius: 6px;
-  border: 1px solid #e9ecef;
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  border: 2px solid #e2e8f0;
   margin-top: 0.25rem;
   font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
+
+.add-spot-form input[type="text"]:focus,
+.add-spot-form input[type="number"]:focus,
+.add-spot-form textarea:focus,
+.add-spot-form select:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 0 0 3px rgba(102,126,234,0.1);
+  transform: translateY(-1px);
+}
+
 .add-spot-form textarea {
-  min-height: 60px;
+  min-height: 80px;
+  resize: vertical;
+  font-family: inherit;
 }
+
 .add-spot-form .form-row {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 1rem;
-  margin-bottom: 1rem;
+  margin: 1rem 0;
+  padding: 1.5rem;
+  background: linear-gradient(135deg, #f7fafc, #edf2f7);
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
 }
+
 .add-spot-form .form-row label {
   margin-bottom: 0;
-  font-weight: 400;
+  font-weight: 500;
+  color: #4a5568;
+  text-transform: none;
+  letter-spacing: normal;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: all 0.2s ease;
 }
+
+.add-spot-form .form-row label:hover {
+  background: rgba(102,126,234,0.1);
+  transform: translateX(2px);
+}
+
+.add-spot-form .form-row input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #667eea;
+  margin: 0;
+}
+
 .submit-btn {
-  background: #4ecdc4;
+  background: linear-gradient(135deg, #4ecdc4, #44a08d);
   color: white;
   border: none;
-  border-radius: 6px;
-  padding: 0.5rem 1.5rem;
-  font-size: 1rem;
+  border-radius: 12px;
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  box-shadow: 0 4px 12px rgba(78,205,196,0.3);
 }
+
 .submit-btn:hover {
-  background: #38b2ac;
-} 
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(78,205,196,0.4);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+/* Coordinate fields styling */
+.add-spot-form label:has(input[type="number"]) {
+  position: relative;
+}
+
+.add-spot-form label:has(input[type="number"])::before {
+  content: "📍";
+  position: absolute;
+  left: -25px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+}
+
+/* Water quality and season styling */
+.add-spot-form select {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+  background-position: right 0.5rem center;
+  background-repeat: no-repeat;
+  background-size: 1.5em 1.5em;
+  padding-right: 2.5rem;
+  appearance: none;
+}
+
+/* Special styling for the name field */
+.add-spot-form label:has(input[name="name"]) {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.add-spot-form label:has(input[name="name"])::before {
+  content: "🏊";
+  position: absolute;
+  left: -35px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.5rem;
+  z-index: 1;
+}
+
+.add-spot-form input[name="name"] {
+  background: linear-gradient(135deg, #f7fafc, #edf2f7);
+  border: 2px solid #cbd5e0;
+  font-size: 1.1rem;
+  font-weight: 500;
+  padding: 1rem 1.25rem;
+  border-radius: 16px;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.add-spot-form input[name="name"]:focus {
+  background: linear-gradient(135deg, #ffffff, #f7fafc);
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102,126,234,0.15);
+  transform: translateY(-2px);
+}
+
+.add-spot-form input[name="name"]::placeholder {
+  color: #a0aec0;
+  font-style: italic;
+}
+
+/* Description field styling */
+.add-spot-form label:has(textarea[name="description"]) {
+  position: relative;
+}
+
+.add-spot-form label:has(textarea[name="description"])::before {
+  content: "📝";
+  position: absolute;
+  left: -35px;
+  top: 1.5rem;
+  font-size: 1.2rem;
+}
+
+.add-spot-form textarea[name="description"] {
+  background: linear-gradient(135deg, #f7fafc, #edf2f7);
+  border: 2px solid #cbd5e0;
+  font-size: 1rem;
+  line-height: 1.5;
+  padding: 1rem 1.25rem;
+  border-radius: 16px;
+  min-height: 100px;
+  transition: all 0.3s ease;
+}
+
+.add-spot-form textarea[name="description"]:focus {
+  background: linear-gradient(135deg, #ffffff, #f7fafc);
+  border-color: #667eea;
+  box-shadow: 0 0 0 4px rgba(102,126,234,0.15);
+  transform: translateY(-2px);
+}
 
 .add-spot-instructions {
   position: fixed;
@@ -518,9 +832,10 @@
   height: 100vh;
   background: rgba(0,0,0,0.3);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   z-index: 2100;
+  pointer-events: none; /* Allow clicks to pass through */
 }
 .add-spot-instructions-inner {
   background: white;
@@ -532,6 +847,8 @@
   position: relative;
   font-size: 1.1rem;
   text-align: center;
+  margin-top: 2rem;
+  pointer-events: auto; /* Re-enable clicks on the instruction box */
 }
 .add-spot-instructions-inner .close-modal {
   top: 1rem;

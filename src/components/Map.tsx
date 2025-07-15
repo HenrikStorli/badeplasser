@@ -83,13 +83,24 @@ const MapComponent: React.FC<MapProps> = ({ spots, selectedSpot, onSpotSelect, o
                     {getAmenitiesIcons(spot)}
                   </div>
                   <div className="spot-info">
-                    <span className={`quality-badge quality-${spot.waterQuality}`}>
-                      {spot.waterQuality}
-                    </span>
-                    <span className={`season-badge season-${spot.season}`}>
-                      {spot.season === 'year-round' ? 'Year Round' : spot.season}
-                    </span>
-                    {spot.isPaid && <span className="paid-badge">Paid</span>}
+                    <div className="info-item">
+                      <strong>Water Quality:</strong>
+                      <span className={`quality-badge quality-${spot.waterQuality}`}>
+                        {spot.waterQuality}
+                      </span>
+                    </div>
+                    <div className="info-item">
+                      <strong>Season:</strong>
+                      <span className={`season-badge season-${spot.season}`}>
+                        {spot.season === 'year-round' ? 'Year Round' : spot.season}
+                      </span>
+                    </div>
+                    <div className="info-item">
+                      <strong>Entry:</strong>
+                      <span className={spot.isPaid ? 'paid-badge' : 'free-badge'}>
+                        {spot.isPaid ? 'Paid' : 'Free'}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
